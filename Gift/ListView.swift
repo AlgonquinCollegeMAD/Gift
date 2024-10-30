@@ -14,7 +14,7 @@ struct Gift: Identifiable {
 }
 
 struct ListView: View {
-  var model = GiftViewModel()
+  @ObservedObject var model = GiftViewModel()
   
     var body: some View {
       NavigationStack {
@@ -30,11 +30,27 @@ struct ListView: View {
                   .padding()
               }
             }
+            .onDelete { indexSet in
+              deleteRows(at: indexSet)
+            }
           }
         }
         .padding()
         .navigationTitle("Generous people I know")
+        .toolbar {
+          ToolbarItem {
+            Button {
+              model.gifts.append(.init(person: "V", description: "V"))
+            } label: {
+              Image(systemName: "gift")
+            }
+          }
+        }
       }
+    }
+  
+    func deleteRows(at offsets: IndexSet) {
+      model.gifts.remove(atOffsets: offsets)
     }
 }
 
