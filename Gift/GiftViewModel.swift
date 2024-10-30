@@ -56,4 +56,5 @@ class GiftViewModel: ObservableObject {
       Gift(person: "Wendy", description: "Outdoor blanket")
     ]
   }
+  
 }
