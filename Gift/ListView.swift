@@ -7,17 +7,11 @@
 
 import SwiftUI
 
-struct Gift: Identifiable {
-  let id: UUID = UUID()
-  var person: String
-  var description: String
-}
-
 struct ListView: View {
   @State var isPresented: Bool = false
   @State var name: String = ""
   @State var description: String = ""
-  @ObservedObject var model = GiftViewModel()
+  @ObservedObject var model = ListViewModel()
   
     var body: some View {
       NavigationStack {

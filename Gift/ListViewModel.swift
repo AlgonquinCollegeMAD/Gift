@@ -1,6 +1,6 @@
 import Foundation
 
-class GiftViewModel: ObservableObject {
+class ListViewModel: ObservableObject {
   @Published var gifts: [Gift] = []
   
   init() {
