@@ -14,6 +14,9 @@ struct Gift: Identifiable {
 }
 
 struct ListView: View {
+  @State var isPresented: Bool = false
+  @State var name: String = ""
+  @State var description: String = ""
   @ObservedObject var model = GiftViewModel()
   
     var body: some View {
@@ -40,11 +43,23 @@ struct ListView: View {
         .toolbar {
           ToolbarItem {
             Button {
-              model.gifts.append(.init(person: "V", description: "V"))
+              isPresented.toggle()
             } label: {
               Image(systemName: "gift")
             }
           }
+        }
+        .sheet(isPresented: $isPresented) {
+          TextField("Gift", text: $name)
+            .padding()
+          TextField("Description", text: $description)
+            .padding()
+          Button {
+            model.gifts.append(.init(person: name, description: description))
+          } label: {
+            Text("Add")
+          }
+          .disabled(name.isEmpty || description.isEmpty)
         }
       }
     }
